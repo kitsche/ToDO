@@ -1,6 +1,6 @@
 //
 //  AddTaskView.swift
-//  ToDo
+//  ToDO
 //
 //  Created by John Suman on 2023/09/01.
 //
@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddTaskView: View {
     @State private var title: String = ""
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -20,6 +21,7 @@ struct AddTaskView: View {
                 .textFieldStyle(.roundedBorder)
             Button {
                 print("✅Task Added")
+                dismiss()
             } label: {
                 Text("Add task")
                     .foregroundStyle(.white)

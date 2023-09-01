@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  ToDo
+//  ToDO
 //
 //  Created by John Suman on 2023/09/01.
 //
@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showAddTaskView = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack(alignment: .bottomTrailing) {
+            TasksView()
+            
+            AddButton()
+                .padding()
+                .onTapGesture {
+                    showAddTaskView.toggle()
+                }
         }
-        .padding()
+        .sheet(isPresented: $showAddTaskView) {
+            AddTaskView()
+        }
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity, alignment: .bottom)
+        .background(.yellow)
     }
 }
 
