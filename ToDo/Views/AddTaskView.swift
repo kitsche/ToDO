@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddTaskView: View {
+    @EnvironmentObject var realmManager: RealmManager
     @State private var title: String = ""
     @Environment(\.dismiss) var dismiss
     
@@ -20,7 +21,9 @@ struct AddTaskView: View {
             TextField("Enter your task here", text: $title )
                 .textFieldStyle(.roundedBorder)
             Button {
-                print("✅Task Added")
+                if title != "" {
+                    realmManager.addTast(taskTitle: title)
+                }
                 dismiss()
             } label: {
                 Text("Add task")
@@ -41,4 +44,5 @@ struct AddTaskView: View {
 
 #Preview {
     AddTaskView()
+        .environmentObject(RealmManager())
 }
